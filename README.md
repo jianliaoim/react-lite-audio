@@ -4,44 +4,33 @@ React Lite Audio
 
 Audio component from Talk by Teambition.
 
-Demo http://teambition.github.io/react-lite-audio/
+Demo http://ui.talk.ai/react-lite-audio/
 
 ### Properties
 
-#### Audio
+* `source`: url for audio file
+* `isUnread`: a Boolean, when true, an unread button is rendered
+* `duration`: a Number, is Safari, duration is not correct, try this
 
 ### Supposition
 
 ### Usage
 
 ```bash
-npm i --save react-lite-dropdown
+npm i --save react-lite-audio
 ```
 
-Read [src/main.jsx](main)(compiles with Babel) for details:
+Use in Webpack:
 
-[main]: https://github.com/teambition/react-lite-dropdown/blob/gh-pages/src/main.jsx
-
-```jsx
-import {default as React} from 'react';
-import './demo.css';
-
-import {default as LiteDropdown} from 'react-lite-dropdown';
-import 'react-lite-dropdown/src/style.css'; // CSS if you need
-
-var languages = 'CoffeeScript PureScript Elm CirruScript'.split(' ');
-
-var App = React.createClass({
-  render: function() {
-  }
-});
-
-var PageApp = React.createFactory(App);
-
-var demo = document.querySelector('.demo');
-
-React.render(PageApp(), demo);
+```coffee
+require 'react-lite-audio'
+require 'react-lite-audio/src/style.less'
+# icons are from teambition/icon-fonts , volubile-ui
 ```
+
+Read [src/main.main](main)(compiles with Babel) for details:
+
+[main]: https://github.com/teambition/react-lite-audio/blob/master/src/main.coffee
 
 ### Develop
 

@@ -1,8 +1,8 @@
 {
-  "name": "react-lite-dropdown",
-  "version": "0.1.0",
-  "description": "Dropdown menu from Talk by teambition",
-  "main": "lib/dropdown.js",
+  "name": "react-lite-audio",
+  "version": "0.0.3",
+  "description": "Tiny audio displayer from Talk by teambition",
+  "main": "lib/audio.js",
   "dependencies": {
     "classnames": "^1.2.0",
     "flex.less": "codio/Flex.less",
