@@ -27,12 +27,12 @@ module.exports = React.createClass
 
   componentDidMount: ->
     @_audioEl = @refs.audio.getDOMNode()
-    @_audioEl.addEventListener 'canplaythrough', @setDuration
+    @_audioEl.addEventListener 'durationchange', @setDuration
     @_audioEl.addEventListener 'timeupdate', @updateProgress
     @_audioEl.addEventListener 'ended', @endProgress
 
   componentWillUnmount: ->
-    @_audioEl.removeEventListener 'canplaythrough', @getDuration
+    @_audioEl.removeEventListener 'durationchange', @setDuration
     @_audioEl.removeEventListener 'timeupdate', @updateProgress
     @_audioEl.removeEventListener 'ended', @endProgress
 
