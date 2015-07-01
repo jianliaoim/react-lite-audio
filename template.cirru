@@ -24,14 +24,14 @@ var
           object (:class :intro)
           div
             object (:class :title)
-            , ":This is a demo of Lite Dropdown."
+            , ":This is a demo of Lite Audio."
           line ":This is the default style used in Talk by Teambition."
           line ":You need to add your own style in your projects."
           div null
             span null ":Read more at "
             a
-              object (:href :http://github.com/teambition/react-lite-dropdown)
-              , :github.com/teambition/react-lite-dropdown
+              object (:href :http://github.com/teambition/react-lite-audio)
+              , :github.com/teambition/react-lite-audio
             span null :.
         div
           object (:class :demo)

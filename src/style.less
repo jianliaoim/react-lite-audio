@@ -1,0 +1,67 @@
+
+@import '~flex.less/flex';
+
+.lite-audio {
+  @color: hsl(210, 79%, 46%);
+  display: inline-block;
+
+  audio {
+    display: none;
+    visibility: hidden;
+  }
+
+  .audio-player {
+    position: relative;
+    display: inline-block;
+    max-width: 200px;
+    min-width: 100px;
+    height: 36px;
+    border-radius: 5px;
+    cursor: pointer;
+    color: @color;
+    background-color: fade(@color, 10%);
+    vertical-align: middle;
+  }
+
+  .content {
+    .display(flex);
+    .flex-direction(row);
+    .justify-content(space-between);
+    .align-items(center);
+  }
+
+  .audio-player .progress {
+    height: 36px;
+    position: absolute;
+    top: 0;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    background-color: fade(@color, 20%);
+  }
+
+  .audio-player .progress.is-playing {
+    transition: width 200ms linear;
+    -webkit-transition: width 200ms linear;
+    -moz-transition: width 200ms linear;
+  }
+
+  .audio-player .icon {
+    margin-left: 8px;
+    font-size: 20px;
+    line-height: 36px;
+  }
+
+  .audio-player .time {
+    margin-right: 15px;
+    line-height: 36px;
+  }
+
+  .unread-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin: 0px 0 0px 10px;
+    border-radius: 50%;
+    background-color: hsl(14, 100%, 63%);
+  }
+}

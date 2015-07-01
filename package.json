@@ -5,21 +5,27 @@
   "main": "lib/dropdown.js",
   "dependencies": {
     "classnames": "^1.2.0",
-    "react": "^0.13.1"
+    "flex.less": "codio/Flex.less",
+    "react": "^0.13.1",
+    "volubile-ui": "0.0.3"
   },
   "devDependencies": {
-    "babel-core": "^5.1.10",
-    "babel-loader": "^5.0.0",
     "cirru-script": "^0.2.3",
     "coffee-loader": "^0.7.2",
     "coffee-script": "^1.9.1",
     "css-loader": "^0.10.1",
     "del": "^1.1.1",
+    "file-loader": "^0.8.4",
     "gulp": "^3.8.11",
     "gulp-coffee": "^2.3.1",
+    "less": "^2.5.1",
+    "less-loader": "^2.2.0",
+    "node-libs-browser": "^0.5.2",
+    "rsyncwrapper": "^0.4.3",
     "run-sequence": "^1.0.2",
     "stir-template": "^0.1.4",
     "style-loader": "^0.10.2",
+    "url-loader": "^0.5.6",
     "webpack": "^1.8.4",
     "webpack-dev-server": "^1.8.0"
   },

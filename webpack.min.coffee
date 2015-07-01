@@ -8,12 +8,12 @@ module.exports =
     main: [ './src/main' ]
   output:
     path: 'build/'
-    filename: '[name].[chunkhash].js'
+    filename: '[name].[chunkhash:8].js'
     publicPath: './build/'
   resolve: config.resolve
   module: config.module
   plugins: [
-    new (webpack.optimize.UglifyJsPlugin)(sourceMap: false)
+    new webpack.optimize.UglifyJsPlugin sourceMap: false
     ->
       @plugin 'done', (stats) ->
         content = JSON.stringify(stats.toJson().assetsByChunkName, null, 2)
