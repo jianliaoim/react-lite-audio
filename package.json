@@ -1,13 +1,13 @@
 {
   "name": "react-lite-audio",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Tiny audio displayer from Talk by teambition",
   "main": "lib/audio.js",
   "dependencies": {
     "classnames": "^1.2.0",
     "flex.less": "codio/Flex.less",
     "react": "^0.13.1",
-    "volubile-ui": "0.0.3"
+    "volubile-ui": "^0.0.4"
   },
   "devDependencies": {
     "cirru-script": "^0.2.3",
