@@ -1,6 +1,6 @@
 {
   "name": "react-lite-audio",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Tiny audio displayer from Talk by teambition",
   "main": "lib/audio.js",
   "dependencies": {
