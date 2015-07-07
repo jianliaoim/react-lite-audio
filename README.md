@@ -53,6 +53,13 @@ Build (Pack and optimize js, reivision js and add entry in `index.html`):
 gulp build
 ```
 
+### Special notice
+However there is a significant anomaly here in Opera, Safari and IE10, which is that the .paused flag remains false when the media has ended.
+You can see the problem [here](here)
+
+Fixed by firing the pause() method and setting currentTime at 0 manually, in response to the "ended" event
+[here]:http://www.sitepoint.com/essential-audio-and-video-events-for-html5/
+
 ### License
 
 MIT

@@ -65,6 +65,10 @@ module.exports = React.createClass
 
   endPlay: ->
     @setState pause: true, playPercent: 0
+    # ".paused" flag remains false in Opera, Safari and IE10, when the audio has ended.
+    # firing the pause() method manually in response to the "ended" event
+    @_audioEl.pause()
+    @_audioEl.currentTime = 0
 
   playClick: ->
     if @_audioEl.paused

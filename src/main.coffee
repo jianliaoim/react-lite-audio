@@ -11,7 +11,7 @@ App = React.createClass
   displayName: 'page-app'
 
   render: ->
-    source = 'http://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3'
+    source = 'http://www.alexkatz.me/codepen/music/interlude.mp3'
     LiteAudio source: source, isUnread: true
 
 PageApp = React.createFactory App
