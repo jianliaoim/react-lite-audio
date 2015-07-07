@@ -1,12 +1,11 @@
-
 React = require 'react/addons'
 cx    = require 'classnames'
 
-div    = React.createFactory 'div'
-span   = React.createFactory 'span'
-audio  = React.createFactory 'audio'
+div   = React.createFactory 'div'
+span  = React.createFactory 'span'
+audio = React.createFactory 'audio'
 
-T  = React.PropTypes
+T = React.PropTypes
 
 module.exports = React.createClass
   displayName: 'quote-audio'
@@ -43,6 +42,17 @@ module.exports = React.createClass
     if defaultDuration < duration
       @setState duration: duration
 
+  formatDuration: (duration) ->
+    if duration <= 0
+      return '00:00'
+    minutes = Math.floor duration / 60
+    seconds = Math.floor duration % 60
+    minutes = if minutes >= 10 then minutes else '0' + minutes
+    seconds = if seconds >= 10 then seconds else '0' + seconds
+    durationFormat = minutes + ':' + seconds
+
+    return durationFormat
+
   updateProgress: ->
     currentTime = @_audioEl.currentTime
     playPercent = currentTime / @state.duration * 100
@@ -67,6 +77,7 @@ module.exports = React.createClass
   render: ->
     src = @props.source
     duration = @state.duration
+    durationFormat = @formatDuration(duration)
 
     className = cx 'icon',
       'icon-play': @state.pause
@@ -82,7 +93,7 @@ module.exports = React.createClass
       div className: 'audio-player', style: timelineStyle, onClick: @playClick,
         div className: 'content',
           span className: className
-          span className: 'time', duration
+          span className: 'time', durationFormat
         div className: classNameProgress, style: progressStyle
       audio ref: 'audio', src: src
       if (not @state.played) and this.props.isUnread

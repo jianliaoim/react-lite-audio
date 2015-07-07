@@ -1,4 +1,3 @@
-
 var
   stir $ require :stir-template
 
