@@ -7,7 +7,7 @@
     "classnames": "^1.2.0",
     "flex.less": "codio/Flex.less",
     "react": "^0.13.1",
-    "volubile-ui": "0.0.3"
+    "volubile-ui": "0.0.4"
   },
   "devDependencies": {
     "cirru-script": "^0.2.3",
