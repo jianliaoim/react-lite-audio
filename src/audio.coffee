@@ -1,12 +1,11 @@
-
 React = require 'react/addons'
-cx = require 'classnames'
+cx    = require 'classnames'
 
-div = React.createFactory 'div'
-span = React.createFactory 'span'
+div   = React.createFactory 'div'
+span  = React.createFactory 'span'
 audio = React.createFactory 'audio'
 
-T  = React.PropTypes
+T = React.PropTypes
 
 module.exports = React.createClass
   displayName: 'quote-audio'
@@ -24,7 +23,6 @@ module.exports = React.createClass
     played: false
     playPercent: 0
     duration: @props.duration or 0
-    durationFormat: '00:00'
 
   componentDidMount: ->
     @_audioEl = @refs.audio.getDOMNode()
@@ -41,17 +39,19 @@ module.exports = React.createClass
     # safari may get wrong duration
     defaultDuration = @props.duration or 0
     duration = Math.round @_audioEl.duration
+    if defaultDuration < duration
+      @setState duration: duration
 
+  formatDuration: (duration) ->
+    if duration <= 0
+      return '00:00'
     minutes = Math.floor duration / 60
     seconds = Math.floor duration % 60
-
     minutes = if minutes >= 10 then minutes else '0' + minutes
     seconds = if seconds >= 10 then seconds else '0' + seconds
-
     durationFormat = minutes + ':' + seconds
 
-    if defaultDuration < duration
-      @setState duration: duration, durationFormat: durationFormat
+    return durationFormat
 
   updateProgress: ->
     currentTime = @_audioEl.currentTime
@@ -77,7 +77,7 @@ module.exports = React.createClass
   render: ->
     src = @props.source
     duration = @state.duration
-    durationFormat = @state.durationFormat
+    durationFormat = @formatDuration(duration)
 
     className = cx 'icon',
       'icon-play': @state.pause
