@@ -1,10 +1,10 @@
 
 React = require 'react/addons'
-cx    = require 'classnames'
+cx = require 'classnames'
 
-div    = React.createFactory 'div'
-span   = React.createFactory 'span'
-audio  = React.createFactory 'audio'
+div = React.createFactory 'div'
+span = React.createFactory 'span'
+audio = React.createFactory 'audio'
 
 T  = React.PropTypes
 
@@ -24,6 +24,7 @@ module.exports = React.createClass
     played: false
     playPercent: 0
     duration: @props.duration or 0
+    durationFormat: '00:00'
 
   componentDidMount: ->
     @_audioEl = @refs.audio.getDOMNode()
@@ -40,8 +41,17 @@ module.exports = React.createClass
     # safari may get wrong duration
     defaultDuration = @props.duration or 0
     duration = Math.round @_audioEl.duration
+
+    minutes = Math.floor duration / 60
+    seconds = Math.floor duration % 60
+
+    minutes = if minutes >= 10 then minutes else '0' + minutes
+    seconds = if seconds >= 10 then seconds else '0' + seconds
+
+    durationFormat = minutes + ':' + seconds
+
     if defaultDuration < duration
-      @setState duration: duration
+      @setState duration: duration, durationFormat: durationFormat
 
   updateProgress: ->
     currentTime = @_audioEl.currentTime
@@ -67,6 +77,7 @@ module.exports = React.createClass
   render: ->
     src = @props.source
     duration = @state.duration
+    durationFormat = @state.durationFormat
 
     className = cx 'icon',
       'icon-play': @state.pause
@@ -82,7 +93,7 @@ module.exports = React.createClass
       div className: 'audio-player', style: timelineStyle, onClick: @playClick,
         div className: 'content',
           span className: className
-          span className: 'time', duration
+          span className: 'time', durationFormat
         div className: classNameProgress, style: progressStyle
       audio ref: 'audio', src: src
       if (not @state.played) and this.props.isUnread
