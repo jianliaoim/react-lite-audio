@@ -8,7 +8,7 @@ audio = React.createFactory 'audio'
 T = React.PropTypes
 
 module.exports = React.createClass
-  displayName: 'quote-audio'
+  displayName: 'quote-audio-slim'
 
   propTypes:
     isUnread: T.bool
@@ -81,24 +81,19 @@ module.exports = React.createClass
     src = @props.source
     duration = @state.duration
     durationFormat = @formatDuration(duration)
-    playPercent = @state.currentTime / @state.duration * 100
+    playedTime = @formatDuration(Math.round @state.currentTime)
 
     className = cx 'icon',
       'icon-play': @state.pause
       'icon-pause': not @state.pause
 
-    classNameProgress = cx 'progress',
-      'is-playing': not @state.pause
-
-    timelineStyle = width: duration / 60 * 100 + 100
-    progressStyle = width: "#{playPercent}%"
-
-    div className: 'lite-audio',
-      div className: 'audio-player', style: timelineStyle, onClick: @playClick,
+    div className: 'lite-audio slim',
+      div className: 'audio-player', onClick: @playClick,
         div className: 'content',
           span className: className
+          if @state.currentTime isnt 0
+            span className: 'time', "#{playedTime}/"
           span className: 'time', durationFormat
-        div className: classNameProgress, style: progressStyle
       audio ref: 'audio', src: src
       if (not @state.played) and this.props.isUnread
         div className: 'unread-dot'

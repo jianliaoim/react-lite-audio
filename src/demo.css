@@ -17,3 +17,7 @@ body {
   width: 400px;
   margin: 60px 0px;
 }
+
+.wrapper + .wrapper {
+  margin-top: 20px;
+}

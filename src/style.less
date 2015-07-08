@@ -27,6 +27,8 @@
     .flex-direction(row);
     .justify-content(space-between);
     .align-items(center);
+    padding-left: 8px;
+    padding-right: 15px;
   }
 
   .audio-player .progress {
@@ -45,13 +47,13 @@
   }
 
   .audio-player .icon {
-    margin-left: 8px;
+    // margin-left: 8px;
     font-size: 20px;
     line-height: 36px;
   }
 
   .audio-player .time {
-    margin-right: 15px;
+    // margin-right: 15px;
     line-height: 36px;
   }
 
@@ -62,5 +64,21 @@
     margin: 0px 0 0px 10px;
     border-radius: 50%;
     background-color: hsl(14, 100%, 63%);
+  }
+}
+
+.lite-audio.slim {
+
+  .audio-player {
+    background-color: #fff;
+  }
+
+  .content {
+    padding: 0;
+    .justify-content(flex-start);
+  }
+
+  .audio-player .icon + .time {
+    margin-left: 10px;
   }
 }
