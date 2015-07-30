@@ -1,6 +1,6 @@
 {
   "name": "react-lite-audio",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Audio Player of jianliao.com",
   "main": "lib/audio.js",
   "dependencies": {
