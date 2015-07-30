@@ -1,6 +1,8 @@
+*.idea
 *.log
 
+index.html
+
 /build
-/node_modules
-/index.html
 /lib
+/node_modules
