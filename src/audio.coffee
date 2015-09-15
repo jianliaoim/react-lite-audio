@@ -39,7 +39,7 @@ module.exports = React.createClass
     # safari may get wrong duration
     defaultDuration = @props.duration or 0
     duration = Math.round @_audioEl.duration
-    if defaultDuration < duration
+    if window.isFinite(duration) and defaultDuration < duration
       @setState duration: duration
 
   formatDuration: (duration) ->
