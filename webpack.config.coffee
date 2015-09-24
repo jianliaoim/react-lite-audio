@@ -1,29 +1,34 @@
+webpack = require 'webpack'
+ExtractTextPlugin = require 'extract-text-webpack-plugin'
 
-fs = require('fs')
 fontName = 'fonts/[name].[ext]'
+imageName = 'images/[name].[ext]'
 
 module.exports =
   entry:
-    main: [
-      'webpack-dev-server/client?http://0.0.0.0:8080'
-      'webpack/hot/dev-server'
-      './src/main'
-    ]
+    vendor: [ 'webpack-dev-server/client?http://0.0.0.0:8080', 'webpack/hot/dev-server' ]
+    main: [ './example/main', './example/main.css' ]
   output:
     path: 'build/'
     filename: '[name].js'
-    publicPath: 'http://localhost:8080/build/'
-  resolve: extensions: ['.js', '.coffee', '']
+    publicPath: 'http://localhost:8080/react-lite-audio/'
+  resolve:
+    extensions: ['.coffee', '.js', '.jsx', '']
   module:
     loaders: [
-      {test: /\.jsx$/, exclude: /node_modules/, loader: 'babel-loader'}
       {test: /\.coffee$/, loader: 'coffee'}
-      {test: /\.css$/, loader: 'style!css'}
-      {test: /\.less$/, loader: 'style!css!less'}
-      {test: /\.woff((\?|\#)[\?\#\w\d_-]+)?$/, loader: "url", query: {limit: 100, minetype: 'application/font-woff', name: fontName}}
-      {test: /\.woff2((\?|\#)[\?\#\w\d_-]+)?$/, loader: "url", query: {limit: 100, minetype: 'application/font-woff2', name: fontName}}
-      {test: /\.ttf((\?|\#)[\?\#\w\d_-]+)?$/, loader: "url", query: {limit: 100, minetype: "application/octet-stream", name: fontName}}
-      {test: /\.eot((\?|\#)[\?\#\w\d_-]+)?$/, loader: "url", query: {limit: 100, name: fontName}}
-      {test: /\.svg((\?|\#)[\?\#\w\d_-]+)?$/, loader: "url", query: {limit: 10000, minetype: "image/svg+xml", name: fontName}}
+      {test: /\.js$/, exclude: /node_modules/, loader: 'babel'}
+      {test: /\.jsx$/, exclude: /node_modules/, loader: 'babel'}
+      {test: /\.css$/, loader: ExtractTextPlugin.extract 'style', 'css?importLoaders=1!autoprefixer?{browsers:[\'> 1%\']}'}
+      {test: /\.less$/, loader: ExtractTextPlugin.extract 'style', 'css?importLoaders=1!autoprefixer?{browsers:[\'> 1%\']}!less'}
+      {test: /\.(png|jpg)$/, loader: 'url', query: {limit: 2048, name: imageName}}
+      {test: /\.woff((\?|\#)[\?\#\w\d_-]+)?$/, loader: 'url', query: {limit: 100, minetype: 'application/font-woff', name: fontName}}
+      {test: /\.woff2((\?|\#)[\?\#\w\d_-]+)?$/, loader: 'url', query: {limit: 100, minetype: 'application/font-woff2', name: fontName}}
+      {test: /\.ttf((\?|\#)[\?\#\w\d_-]+)?$/, loader: 'url', query: {limit: 100, minetype: 'application/octet-stream', name: fontName}}
+      {test: /\.eot((\?|\#)[\?\#\w\d_-]+)?$/, loader: 'url', query: {limit: 100, name: fontName}}
+      {test: /\.svg((\?|\#)[\?\#\w\d_-]+)?$/, loader: 'url', query: {limit: 10000, minetype: 'image/svg+xml', name: fontName}}
     ]
-  plugins: []
+  plugins: [
+    new webpack.optimize.CommonsChunkPlugin 'vendor', 'vendor.js'
+    new ExtractTextPlugin 'style.css'
+  ]

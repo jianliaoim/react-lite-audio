@@ -1,18 +1,32 @@
-'use strict'
-
-gulp = require('gulp')
-sequence = require('run-sequence')
 exec = require('child_process').exec
+gulp = require 'gulp'
+sequence = require 'run-sequence'
+
 env =
   dev: true
-  main: 'http://localhost:8080/build/main.js'
+  main: '//localhost:8080/react-lite-audio/main.js'
+  vendor: '//localhost:8080/react-lite-audio/vendor.js'
+  style: '//localhost:8080/react-lite-audio/style.css'
 
-gulp.task 'script', ->
-  coffee = require('gulp-coffee')
+gulp.task 'del', (cb) ->
+  del = require 'del'
+  del [ 'lib/', 'build/' ], cb
+
+gulp.task 'html', ->
+  fs = require 'fs'
+  swig = require 'gulp-swig'
+
+  assets = undefined
+  unless env.dev
+    assets = require './build/assets.json'
+    env.main = './build/' + assets.main[0]
+    env.style = './build/' + assets.main[1]
+    env.vendor = './build/' + assets.vendor
+
   gulp
-  .src 'src/*.coffee'
-  .pipe coffee()
-  .pipe gulp.dest('lib/')
+  .src './index.tmpl'
+  .pipe swig data: env
+  .pipe gulp.dest './'
 
 gulp.task 'rsync', (cb) ->
   wrapper = require 'rsyncwrapper'
@@ -30,20 +44,13 @@ gulp.task 'rsync', (cb) ->
     console.log cmd
     cb()
 
-gulp.task 'html', (cb) ->
-  require('cirru-script/lib/register')
-  html = require('./template.cirru')
-  fs = require('fs')
-  assets = undefined
-  unless env.dev
-    assets = require('./build/assets.json')
-    env.main = './build/' + assets.main
+gulp.task 'script', ->
+  coffee = require 'gulp-coffee'
 
-  fs.writeFile 'index.html', html(env), cb
-
-gulp.task 'del', (cb) ->
-  del = require('del')
-  del [ 'lib', 'build' ], cb
+  gulp
+  .src 'src/*.coffee'
+  .pipe coffee()
+  .pipe gulp.dest './lib/'
 
 gulp.task 'webpack', (cb) ->
   if env.dev
