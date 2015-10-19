@@ -23,7 +23,8 @@ npm i --save react-lite-audio
 Use in Webpack:
 
 ```coffee
-require 'react-lite-audio'
+require('react-lite-audio').liteAudio
+require('react-lite-audio').liteAudioSlim
 require 'react-lite-audio/src/style.less'
 # icons are from teambition/icon-fonts , volubile-ui
 ```
