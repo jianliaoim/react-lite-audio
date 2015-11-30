@@ -14,6 +14,8 @@ Demo http://ui.talk.ai/react-lite-audio/
 
 ### Supposition
 
+* Only one piece of audio is playing at one moment.
+
 ### Usage
 
 ```bash
@@ -55,6 +57,7 @@ gulp build
 ```
 
 ### Special notice
+
 However there is a significant anomaly here in Opera, Safari and IE10, which is that the .paused flag remains false when the media has ended.
 You can see the problem [here](here)
 

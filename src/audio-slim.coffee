@@ -1,6 +1,8 @@
 React = require 'react/addons'
 cx    = require 'classnames'
 
+bus = require './bus'
+
 div   = React.createFactory 'div'
 span  = React.createFactory 'span'
 audio = React.createFactory 'audio'
@@ -29,11 +31,13 @@ module.exports = React.createClass
     @_audioEl.addEventListener 'durationchange', @setDuration
     @_audioEl.addEventListener 'timeupdate', @updateProgress
     @_audioEl.addEventListener 'ended', @endProgress
+    bus.on 'play', @onBusPlay
 
   componentWillUnmount: ->
     @_audioEl.removeEventListener 'durationchange', @setDuration
     @_audioEl.removeEventListener 'timeupdate', @updateProgress
     @_audioEl.removeEventListener 'ended', @endProgress
+    bus.off 'play', @onBusPlay
 
   setDuration: ->
     # safari may get wrong duration
@@ -71,9 +75,16 @@ module.exports = React.createClass
 
   playClick: ->
     if @_audioEl.paused
+      bus.trigger 'play'
       @_audioEl.play()
       @setState pause: false, played: true
     else
+      @_audioEl.pause()
+      @setState pause: true, played: true
+
+  onBusPlay: (event) ->
+    console.log 'on play event', event
+    if not @state.paused
       @_audioEl.pause()
       @setState pause: true, played: true
 
