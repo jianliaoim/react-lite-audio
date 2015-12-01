@@ -83,7 +83,6 @@ module.exports = React.createClass
       @setState pause: true, played: true
 
   onBusPlay: (event) ->
-    console.log 'on play event', event
     if not @state.paused
       @_audioEl.pause()
       @setState pause: true, played: true
