@@ -93,22 +93,22 @@ module.exports = React.createClass
     durationFormat = @formatDuration(duration)
     playPercent = @state.currentTime / @state.duration * 100
 
-    className = cx 'icon',
+    className = cx 'audio-player',
+      'is-playing': not @state.pause
+
+    classNameIcon = cx 'icon',
       'icon-play': @state.pause
       'icon-pause': not @state.pause
-
-    classNameProgress = cx 'progress',
-      'is-playing': not @state.pause
 
     timelineStyle = width: duration / 60 * 100 + 100
     progressStyle = width: "#{playPercent}%"
 
     div className: 'lite-audio',
-      div className: 'audio-player', style: timelineStyle, onClick: @playClick,
+      div className: className, style: timelineStyle, onClick: @playClick,
         div className: 'content',
-          span className: className
+          span className: classNameIcon
           span className: 'time', durationFormat
-        div className: classNameProgress, style: progressStyle
+          if (not @state.played) and this.props.isUnread
+            div className: 'unread-dot'
+        div className: 'progress', style: progressStyle
       audio ref: 'audio', src: src
-      if (not @state.played) and this.props.isUnread
-        div className: 'unread-dot'

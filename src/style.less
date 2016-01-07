@@ -1,7 +1,7 @@
 @import '~flex.less/flex';
 
 .lite-audio {
-  @color: hsl(210, 79%, 46%);
+  @color: #E85B48;
   display: inline-block;
 
   audio {
@@ -12,73 +12,77 @@
   .audio-player {
     position: relative;
     display: inline-block;
-    max-width: 200px;
+    max-width: 360px;
     min-width: 100px;
-    height: 36px;
-    border-radius: 5px;
+    height: 32px;
+    line-height: 30px;
     cursor: pointer;
-    color: @color;
-    background-color: fade(@color, 10%);
+    background-color: #FFF;
+    color: #B3B3B3;
     vertical-align: middle;
+
+    .icon {
+      color: @color;
+    }
+  }
+
+  &:not(.slim) .audio-player {
+    border: 1px solid #EDEDED;
+    border-radius: 4px;
+
+    &:hover, &.is-playing {
+      color: @color;
+      border-color: #FFD2CC;
+    }
   }
 
   .content {
     .display(flex);
     .flex-direction(row);
-    .justify-content(space-between);
     .align-items(center);
     padding-left: 8px;
     padding-right: 15px;
   }
 
   .audio-player .progress {
-    height: 36px;
+    height: 30px;
     position: absolute;
     top: 0;
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
-    background-color: fade(@color, 20%);
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    background-color: #FFEDEB;
   }
 
-  .audio-player .progress.is-playing {
+  .audio-player.is-playing .progress {
     transition: width 200ms linear;
     -webkit-transition: width 200ms linear;
     -moz-transition: width 200ms linear;
   }
 
   .audio-player .icon {
-    // margin-left: 8px;
-    font-size: 20px;
-    line-height: 36px;
+    font-size: 16px;
+    z-index: 1;
   }
 
   .audio-player .time {
-    // margin-right: 15px;
-    line-height: 36px;
+    .flex-grow(1);
+    margin-left: 8px;
+    font-size: 13px;
+    z-index: 1;
   }
 
   .unread-dot {
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    margin: 0px 0 0px 10px;
+    width: 8px;
+    height: 8px;
+    margin-left: 8px;
     border-radius: 50%;
-    background-color: hsl(14, 100%, 63%);
+    background-color: @color;
   }
 }
 
 .lite-audio.slim {
-
-  .audio-player {
-    background-color: #fff;
-  }
-
   .content {
     padding: 0;
     .justify-content(flex-start);
-  }
-
-  .audio-player .icon + .time {
-    margin-left: 10px;
   }
 }

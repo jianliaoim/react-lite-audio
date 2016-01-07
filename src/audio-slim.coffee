@@ -104,6 +104,7 @@ module.exports = React.createClass
           if @state.currentTime isnt 0
             span className: 'time', "#{playedTime}/"
           span className: 'time', durationFormat
+          if (not @state.played) and this.props.isUnread
+            div className: 'unread-dot'
       audio ref: 'audio', src: src
-      if (not @state.played) and this.props.isUnread
-        div className: 'unread-dot'
+
