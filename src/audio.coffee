@@ -1,4 +1,4 @@
-React = require 'react/addons'
+React = require 'react'
 cx    = require 'classnames'
 
 bus = require './bus'
@@ -27,7 +27,7 @@ module.exports = React.createClass
     duration: @props.duration or 0
 
   componentDidMount: ->
-    @_audioEl = @refs.audio.getDOMNode()
+    @_audioEl = @refs.audio
     @_audioEl.addEventListener 'durationchange', @setDuration
     @_audioEl.addEventListener 'timeupdate', @updateProgress
     @_audioEl.addEventListener 'ended', @endProgress
